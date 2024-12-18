@@ -23,7 +23,6 @@ avg_df = df.groupBy(
 output_path = f"/tmp/golg/avg_stats"
 os.makedirs(output_path, exist_ok=True)
 avg_df.write.mode("overwrite").parquet(output_path)
-print(f"Data saved to {output_path}")
 avg_df = spark.read.parquet(output_path)
 avg_df.show(truncate=False)
 

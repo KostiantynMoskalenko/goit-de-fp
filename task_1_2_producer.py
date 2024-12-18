@@ -42,7 +42,6 @@ for new_topik in [ATHLETE_TOPIC_NAME, OUTPUT_TOPIC_NAME]:
 print(admin_client.list_topics())
 admin_client.close()
 
-# Kafka Producer Initialization
 try:
     producer = KafkaProducer(
         bootstrap_servers=kafka_config['bootstrap_servers'],
@@ -58,7 +57,7 @@ except Exception as e:
     print(f"Failed to initialize KafkaProducer: {e}")
     sys.exit(1)
 
-# Read data from the database into a Spark DataFrame
+# Read data to the Spark DataFrame
 jdbc_table = "athlete_event_results"
 spark = SparkSession.builder.config("spark.jars", "mysql-connector-j-8.0.32.jar").appName("JDBCToKafka").getOrCreate()
 df = spark.read.format('jdbc').options(url=jdbc_config["url"],

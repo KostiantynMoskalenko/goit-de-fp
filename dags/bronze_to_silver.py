@@ -23,7 +23,6 @@ for table in tables:
     output_path = f"/tmp/silver/{table}"
     os.makedirs(output_path, exist_ok=True)
     df.write.mode("overwrite").parquet(output_path)
-    print(f"Data saved to {output_path}")
     df = spark.read.parquet(output_path)
     df.show(truncate=False)
 
